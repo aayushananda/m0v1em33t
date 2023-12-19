@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Movies Presented</title>
+    <style>
+        html {
+            background-color: rgb(19, 18, 19);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            font-family: 'Papyrus', sans-serif; /* Set the font to Papyrus */
+        }
+
+        .image-track {
+            display: flex;
+            gap: 4vmin;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .image-track img {
+            width: 40vmin;
+            height: 56vmin;
+            object-fit: cover;
+            object-position: center;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            animation: slideAnimation 1.2s forwards;
+        }
+
+        @keyframes slideAnimation {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .invisible-slider {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+        .main {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: 1px;
+            width: 1px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: -24vw -44vh 2px 2px #fff, 38vw -4vh 0px 0px #fff, -20vw -48vh 1px 2px #fff, -39vw 38vh 3px 1px #fff,
+                -42vw -11vh 0px 3px #fff, 12vw 15vh 3px 3px #fff, 42vw 6vh 3px 2px #fff, -8vw 9vh 0px 2px #fff, 34vw -38vh 1px 0px #fff,
+                -17vw 45vh 3px 1px #fff, 22vw -36vh 3px 2px #fff, -42vw 1vh 1px 0px #fff, 10vw 20vh 1px 1px #fff, -30vw -25vh 2px 2px #fff,
+                5vw -10vh 1px 1px #fff;
+            animation: zoom 8s alternate infinite, rotate 20s linear infinite;
+        }
+
+ 
+        body {
+            background-color: #000;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .main {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            height: 1px;
+            width: 1px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: -24vw -44vh 2px 2px #fff, 38vw -4vh 0px 0px #fff, -20vw -48vh 1px 2px #fff, -39vw 38vh 3px 1px #fff,
+                -42vw -11vh 0px 3px #fff, 12vw 15vh 3px 3px #fff, 42vw 6vh 3px 2px #fff, -8vw 9vh 0px 2px #fff, 34vw -38vh 1px 0px #fff,
+                -17vw 45vh 3px 1px #fff, 22vw -36vh 3px 2px #fff, -42vw 1vh 1px 0px #fff, 10vw 20vh 1px 1px #fff, -30vw -25vh 2px 2px #fff,
+                5vw -10vh 1px 1px #fff;
+            animation: zoom 8s alternate infinite, rotate 20s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Movies Presented</h1>
+    </header>
+
+    <!-- Image Track -->
+    <div class="image-track">
+        <a href="https://www.imdb.com/title/tt11768948/?ref_=fn_al_tt_1">
+            <img src="./image1.jpg.jpg" alt="Image 1">
+        </a>
+        <a href="https://www.imdb.com/title/tt11924384/?ref_=fn_al_tt_2">
+            <img src="./image2.jpg.jpg" alt="Image 2">
+        </a>
+        <a href="https://www.imdb.com/title/tt1513204/?ref_=nv_sr_srsg_0_tt_8_nm_0_q_some%2520boys%2520don%27t%2520leave">
+            <img src="./image3.jpg.jpg" alt="Image 3">
+        </a>
+        <a href="https://youtu.be/9-GRzu6zbS0?si=M0Yasuw4yAEDejg4">
+            <img src="./image4.jpg.jpeg" alt="Image 4">
+        </a>
+        <a href="URL_HERE">
+            <img src="./image5.jpg" alt="Image 5">
+        </a>
+        <a href="URL_HERE">
+            <img src="./image6.jpg" alt="Image 6">
+        </a>
+        <a href="URL_HERE">
+            <img src="./image7.jpg" alt="Image 7">
+        </a>
+        <a href="URL_HERE">
+            <img src="./image8.jpg" alt="Image 8">
+        </a>
+        <a href="URL_HERE">
+            <img src="./image9.jpg" alt="Image 9">
+        </a>
+        <a href="URL_HERE">
+            <img src="./image10.jpg" alt="Image 10">
+        </a>
+    </div>
+
+    <div class="main"></div>
+
+    <!-- Invisible Slider -->
+    <div class="invisible-slider" id="invisibleSlider"></div>
+
+    <script>
+        // JavaScript for panning effect and invisible slider
+        const invisibleSlider = document.getElementById('invisibleSlider');
+        const imageTrack = document.querySelector('.image-track');
+        let isGrabbing = false;
+        let startScrollX = 0;
+
+        invisibleSlider.addEventListener('mousedown', (event) => {
+            isGrabbing = true;
+            startScrollX = event.pageX;
+            document.body.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (!isGrabbing) return;
+
+            const newScrollX = event.pageX;
+            const relativePosition = newScrollX - startScrollX;
+            const maxDistance = window.innerWidth / 2;
+            let percentage = (relativePosition / maxDistance) * -100;
+
+            // Ensure the percentage stays within the range of -100% to 0%
+            percentage = Math.min(0, Math.max(-100, percentage));
+
+            imageTrack.style.transform = `translate(-50%, -50%) translateX(calc(${percentage}% + 30%))`;
+            // The '30%' is the space you want to leave empty from the left side
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isGrabbing) {
+                isGrabbing = false;
+                document.body.style.cursor = 'grab';
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            if (isGrabbing) {
+                isGrabbing = false;
+                document.body.style.cursor = 'grab';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
+
+
+
+
